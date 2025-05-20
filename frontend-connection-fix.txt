@@ -1,0 +1,28 @@
+# 前端API连接测试修复说明
+
+在前端代码中，连接测试使用的URL为 `/facechain/tasks/test-id`，此路径与后端接口不匹配，导致404错误。
+
+## 修复方法
+
+1. 后端已添加了专门的连接测试端点：`/facechain/connection-test`
+
+2. 请修改前端代码 `monna-app/src/services/api.js` 中的测试URL：
+
+```javascript
+// 将此行:
+const pythonEndpoints = [
+  { url: `${PYTHON_FACECHAIN_API_BASE_URL}/facechain/tasks/test-id`, name: "Python FastAPI Facechain Task Test" }
+];
+
+// 修改为:
+const pythonEndpoints = [
+  { url: `${PYTHON_FACECHAIN_API_BASE_URL}/facechain/connection-test`, name: "Python FastAPI Facechain Connection Test" }
+];
+```
+
+3. 重启前端应用后，"测试服务器连接"功能将正常工作。
+
+## 问题原因
+
+- 原测试URL会与任务查询接口 `/facechain/tasks/{task_id}` 混淆，导致系统将"test-id"视为任务ID进行查找
+- 新的测试端点使用专用URL，避免与参数化路由冲突 

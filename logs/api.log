@@ -1,0 +1,1788 @@
+2025-05-18 17:52:39,349 - app.api.endpoints.facechain - INFO - 接收到连接测试请求
+2025-05-18 17:59:00,250 - app.api.endpoints.facechain - INFO - 接收到连接测试请求
+2025-05-18 19:09:14,389 - app.api.endpoints.facechain - INFO - 接收到AI人像生成请求，创建任务 130e211c-e8a0-4e85-afed-542b50af5e55
+2025-05-18 19:09:14,409 - app.api.endpoints.facechain - INFO - 开始处理FaceChain任务 130e211c-e8a0-4e85-afed-542b50af5e55
+2025-05-18 19:09:14,409 - app.api.endpoints.facechain - INFO - 执行FaceChain推理命令...
+2025-05-18 19:09:14,729 - app.api.endpoints.facechain - ERROR - FaceChain处理失败:   File "<string>", line 7
+    sys.path.append('D:\xroting\monna\monna-backend\models\facechain')
+                                                                     ^
+SyntaxError: (unicode error) 'unicodeescape' codec can't decode bytes in position 2-3: truncated \xXX escape
+
+2025-05-18 19:21:16,148 - app.api.endpoints.facechain - INFO - 接收到AI人像生成请求，创建任务 6c600dbd-a197-4656-a8a0-f79a9a4243c5
+2025-05-18 19:21:16,170 - app.api.endpoints.facechain - INFO - 开始处理FaceChain任务 6c600dbd-a197-4656-a8a0-f79a9a4243c5
+2025-05-18 19:21:16,171 - app.api.endpoints.facechain - INFO - 执行FaceChain推理命令...
+2025-05-18 19:22:04,991 - app.api.endpoints.facechain - ERROR - FaceChain处理失败: D:\xroting\monna\monna-backend\venv310\lib\site-packages\diffusers\models\transformers\transformer_2d.py:34: FutureWarning: `Transformer2DModelOutput` is deprecated and will be removed in version 1.0.0. Importing `Transformer2DModelOutput` from `diffusers.models.transformer_2d` is deprecated and this will be removed in a future version. Please use `from diffusers.models.modeling_outputs import Transformer2DModelOutput`, instead.
+  deprecate("Transformer2DModelOutput", "1.0.0", deprecation_message)
+Traceback (most recent call last):
+  File "<string>", line 10, in <module>
+  File "D:\xroting\monna\monna-backend\models\facechain\facechain\inference_fact.py", line 20, in <module>
+    from modelscope.pipelines import pipeline
+  File "D:\xroting\monna\monna-backend\venv310\lib\site-packages\modelscope\pipelines\__init__.py", line 4, in <module>
+    from .base import Pipeline
+  File "D:\xroting\monna\monna-backend\venv310\lib\site-packages\modelscope\pipelines\base.py", line 16, in <module>
+    from modelscope.msdatasets import MsDataset
+  File "D:\xroting\monna\monna-backend\venv310\lib\site-packages\modelscope\msdatasets\__init__.py", line 2, in <module>
+    from modelscope.msdatasets.ms_dataset import MsDataset
+  File "D:\xroting\monna\monna-backend\venv310\lib\site-packages\modelscope\msdatasets\ms_dataset.py", line 9, in <module>
+    from datasets import (Dataset, DatasetDict, Features, IterableDataset,
+ModuleNotFoundError: No module named 'datasets'
+
+2025-05-18 19:49:50,598 - app.api.endpoints.facechain - INFO - 接收到AI人像生成请求，创建任务 07523a35-55ec-4bf5-a32b-f950c7b17569
+2025-05-18 19:49:50,624 - app.api.endpoints.facechain - INFO - 开始处理FaceChain任务 07523a35-55ec-4bf5-a32b-f950c7b17569
+2025-05-18 19:49:50,624 - app.api.endpoints.facechain - ERROR - 处理FaceChain任务时出错: local variable 'e' referenced before assignment
+Traceback (most recent call last):
+  File "D:\xroting\monna\monna-backend\app\api\endpoints\facechain.py", line 348, in process_facechain_task
+    print(f"导入facechain模块失败: {e}")
+UnboundLocalError: local variable 'e' referenced before assignment
+2025-05-18 21:07:29,257 - datasets - INFO - PyTorch version 2.7.0+cu128 available.
+2025-05-18 21:07:29,580 - app.api.endpoints.facechain - INFO - Application startup: Initializing FaceChain model...
+2025-05-18 21:07:29,580 - app.api.endpoints.facechain - INFO - Initializing FaceChain GenPortrait model...
+2025-05-18 21:08:14,923 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:08:14,924 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:14,925 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:14,926 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:14,926 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:14,926 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:14,926 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:14,926 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:14,927 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:14,927 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:14,927 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:14,927 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:14,927 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:14,927 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:14,927 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:14,927 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:14,927 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:14,928 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:14,928 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:14,928 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:14,928 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:38,906 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:08:38,907 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:38,907 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:38,908 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:38,908 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:38,908 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:38,908 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:38,909 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:38,909 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:38,909 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:38,909 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:38,909 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:38,909 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:38,910 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:38,910 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:38,910 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:38,910 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:38,910 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:38,910 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:08:38,910 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:08:38,910 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:09:28,486 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:09:28,487 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:09:28,487 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:09:28,487 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:09:28,488 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:09:28,488 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:09:28,488 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:09:28,488 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:09:28,488 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:09:28,488 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:09:28,488 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:09:28,489 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:09:28,489 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:09:28,489 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:09:28,489 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:09:28,489 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:09:28,489 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:09:28,489 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:09:28,489 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:09:28,489 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:09:28,489 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:09:44,807 - app.api.endpoints.facechain - INFO - FaceChain GenPortrait model initialized successfully.
+2025-05-18 21:09:44,807 - app.api.endpoints.facechain - INFO - Loading FaceChain styles from D:\xroting\monna\monna-backend\models\facechain\styles...
+2025-05-18 21:09:44,811 - app.api.endpoints.facechain - INFO - Successfully loaded 75 FaceChain styles.
+2025-05-18 21:09:44,811 - app.api.endpoints.facechain - INFO - FaceChain model initialization attempt complete.
+2025-05-18 21:17:45,158 - datasets - INFO - PyTorch version 2.7.0+cu128 available.
+2025-05-18 21:17:45,439 - app.api.endpoints.facechain - INFO - Application startup: Initializing FaceChain model...
+2025-05-18 21:17:45,439 - app.api.endpoints.facechain - INFO - Initializing FaceChain GenPortrait model...
+2025-05-18 21:18:17,962 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:18:17,964 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:17,964 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:17,964 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:17,964 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:17,965 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:17,965 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:17,965 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:17,965 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:17,965 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:17,965 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:17,965 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:17,966 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:17,966 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:17,966 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:17,966 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:17,966 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:17,966 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:17,966 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:17,967 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:17,967 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:49,314 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:18:49,315 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:49,315 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:49,315 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:49,316 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:49,316 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:49,316 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:49,316 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:49,316 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:49,316 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:49,316 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:49,318 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:49,318 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:49,318 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:49,318 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:49,318 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:49,318 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:49,318 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:49,318 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:18:49,318 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:18:49,318 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:19:44,409 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:19:44,409 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:19:44,410 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:19:44,410 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:19:44,410 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:19:44,410 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:19:44,411 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:19:44,411 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:19:44,411 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:19:44,411 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:19:44,411 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:19:44,412 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:19:44,412 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:19:44,412 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:19:44,412 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:19:44,412 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:19:44,412 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:19:44,412 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:19:44,412 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:19:44,412 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:19:44,412 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:20:03,285 - app.api.endpoints.facechain - INFO - FaceChain GenPortrait model initialized successfully.
+2025-05-18 21:20:03,285 - app.api.endpoints.facechain - INFO - Loading FaceChain styles from D:\xroting\monna\monna-backend\models\facechain\styles...
+2025-05-18 21:20:03,289 - app.api.endpoints.facechain - INFO - Successfully loaded 75 FaceChain styles.
+2025-05-18 21:20:03,289 - app.api.endpoints.facechain - INFO - FaceChain model initialization attempt complete.
+2025-05-18 21:25:22,454 - datasets - INFO - PyTorch version 2.7.0+cu128 available.
+2025-05-18 21:25:22,764 - app.api.endpoints.facechain - INFO - Application startup: Initializing FaceChain model...
+2025-05-18 21:25:22,764 - app.api.endpoints.facechain - INFO - Initializing FaceChain GenPortrait model...
+2025-05-18 21:25:53,628 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:25:53,629 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:25:53,629 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:25:53,629 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:25:53,629 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:25:53,629 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:25:53,629 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:25:53,629 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:25:53,629 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:25:53,630 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:25:53,630 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:25:53,630 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:25:53,630 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:25:53,630 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:25:53,630 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:25:53,630 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:25:53,630 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:25:53,631 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:25:53,631 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:25:53,631 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:25:53,631 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:26:16,347 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:26:16,348 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:26:16,348 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:26:16,348 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:26:16,348 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:26:16,348 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:26:16,348 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:26:16,348 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:26:16,348 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:26:16,349 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:26:16,349 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:26:16,349 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:26:16,349 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:26:16,349 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:26:16,349 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:26:16,349 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:26:16,349 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:26:16,349 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:26:16,349 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:26:16,350 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:26:16,350 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:27:48,026 - urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=2, read=1, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='www.modelscope.cn', port=443): Read timed out. (read timeout=60)")': /api/v1/models/damo/cv_resnet50_face-detection_retinaface
+2025-05-18 21:28:50,061 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=2, read=0, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='www.modelscope.cn', port=443): Read timed out. (read timeout=60)")': /api/v1/models/damo/cv_resnet50_face-detection_retinaface
+2025-05-18 21:29:20,321 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:29:20,321 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:29:20,322 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:29:20,322 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:29:20,322 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:29:20,322 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:29:20,322 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:29:20,322 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:29:20,322 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:29:20,324 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:29:20,324 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:29:20,324 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:29:20,324 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:29:20,324 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:29:20,324 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:29:20,325 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:29:20,325 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:29:20,325 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:29:20,325 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:29:20,325 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:29:20,325 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:29:37,192 - app.api.endpoints.facechain - INFO - FaceChain GenPortrait model initialized successfully.
+2025-05-18 21:29:37,192 - app.api.endpoints.facechain - INFO - Loading FaceChain styles from D:\xroting\monna\monna-backend\models\facechain\styles...
+2025-05-18 21:29:37,198 - app.api.endpoints.facechain - INFO - Successfully loaded 75 FaceChain styles.
+2025-05-18 21:29:37,198 - app.api.endpoints.facechain - INFO - FaceChain model initialization attempt complete.
+2025-05-18 21:29:44,446 - datasets - INFO - PyTorch version 2.7.0+cu128 available.
+2025-05-18 21:29:44,748 - app.api.endpoints.facechain - INFO - Application startup: Initializing FaceChain model...
+2025-05-18 21:29:44,748 - app.api.endpoints.facechain - INFO - Initializing FaceChain GenPortrait model...
+2025-05-18 21:30:16,685 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:30:16,686 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:16,686 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:16,686 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:16,686 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:16,686 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:16,686 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:16,686 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:16,687 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:16,687 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:16,687 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:16,687 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:16,687 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:16,687 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:16,688 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:16,688 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:16,688 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:16,688 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:16,688 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:16,688 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:16,688 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:51,801 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:30:51,801 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:51,801 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:51,801 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:51,802 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:51,804 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:51,804 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:51,804 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:30:51,804 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:30:51,804 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:31:51,934 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:31:51,935 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:31:51,935 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:31:51,935 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:31:51,935 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:31:51,935 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:31:51,936 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:31:51,936 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:31:51,936 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:31:51,936 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:31:51,936 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:31:51,936 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:31:51,936 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:31:51,936 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:31:51,936 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:31:51,936 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:31:51,937 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:31:51,937 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:31:51,937 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:31:51,937 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:31:51,937 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:32:10,089 - app.api.endpoints.facechain - INFO - FaceChain GenPortrait model initialized successfully.
+2025-05-18 21:32:10,089 - app.api.endpoints.facechain - INFO - Loading FaceChain styles from D:\xroting\monna\monna-backend\models\facechain\styles...
+2025-05-18 21:32:10,093 - app.api.endpoints.facechain - INFO - Successfully loaded 75 FaceChain styles.
+2025-05-18 21:32:10,093 - app.api.endpoints.facechain - INFO - FaceChain model initialization attempt complete.
+2025-05-18 21:36:41,193 - datasets - INFO - PyTorch version 2.7.0+cu128 available.
+2025-05-18 21:36:41,490 - app.api.endpoints.facechain - INFO - Application startup: Initializing FaceChain model...
+2025-05-18 21:36:41,490 - app.api.endpoints.facechain - INFO - Initializing FaceChain GenPortrait model...
+2025-05-18 21:37:15,788 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:37:15,790 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:15,790 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:15,790 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:15,791 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:15,791 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:15,792 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:15,792 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:15,792 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:15,792 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:15,793 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:15,793 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:15,793 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:15,793 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:15,793 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:15,794 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:15,794 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:15,794 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:15,794 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:15,794 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:15,794 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:37,951 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:37:37,951 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:37,951 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:37,951 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:37,951 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:37,952 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:37,952 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:37,952 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:37,952 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:37,952 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:37,952 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:37,952 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:37,952 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:37,952 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:37,954 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:37,954 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:37,954 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:37,954 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:37,954 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:37:37,954 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:37:37,954 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:38:29,059 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:38:29,060 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:38:29,060 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:38:29,060 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:38:29,060 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:38:29,060 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:38:29,060 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:38:29,061 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:38:29,061 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:38:29,061 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:38:29,061 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:38:29,061 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:38:29,061 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:38:29,061 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:38:29,061 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:38:29,061 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:38:29,061 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:38:29,061 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:38:29,062 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:38:29,062 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:38:29,062 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:38:44,306 - app.api.endpoints.facechain - INFO - FaceChain GenPortrait model initialized successfully.
+2025-05-18 21:38:44,307 - app.api.endpoints.facechain - INFO - Loading FaceChain styles from D:\xroting\monna\monna-backend\models\facechain\styles...
+2025-05-18 21:38:44,312 - app.api.endpoints.facechain - INFO - Successfully loaded 75 FaceChain styles.
+2025-05-18 21:38:44,312 - app.api.endpoints.facechain - INFO - FaceChain model initialization attempt complete.
+2025-05-18 21:49:07,442 - datasets - INFO - PyTorch version 2.7.0+cu128 available.
+2025-05-18 21:49:07,739 - app.api.endpoints.facechain - INFO - Application startup: Initializing FaceChain model...
+2025-05-18 21:49:07,739 - app.api.endpoints.facechain - INFO - Initializing FaceChain GenPortrait model...
+2025-05-18 21:49:34,490 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:49:34,491 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:49:34,491 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:49:34,492 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:49:34,492 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:49:34,492 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:49:34,492 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:49:34,492 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:49:34,492 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:49:34,492 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:49:34,492 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:49:34,492 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:49:34,492 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:49:34,494 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:49:34,494 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:49:34,494 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:49:34,494 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:49:34,494 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:49:34,494 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:49:34,494 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:49:34,494 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:00,082 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:50:00,082 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:00,082 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:00,082 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:00,082 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:00,084 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:00,084 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:00,084 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:00,084 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:00,084 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:00,084 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:00,084 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:00,084 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:00,085 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:00,085 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:00,085 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:00,085 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:00,085 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:00,085 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:00,085 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:00,085 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:59,644 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:50:59,645 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:59,645 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:59,645 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:59,646 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:59,646 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:59,646 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:59,646 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:59,646 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:59,646 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:59,646 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:59,646 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:59,646 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:59,647 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:59,647 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:59,647 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:59,647 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:59,647 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:59,647 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:50:59,647 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:50:59,647 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:51:15,491 - app.api.endpoints.facechain - INFO - FaceChain GenPortrait model initialized successfully.
+2025-05-18 21:51:15,491 - app.api.endpoints.facechain - INFO - Loading FaceChain styles from D:\xroting\monna\monna-backend\models\facechain\styles...
+2025-05-18 21:51:15,496 - app.api.endpoints.facechain - INFO - Successfully loaded 75 FaceChain styles.
+2025-05-18 21:51:15,496 - app.api.endpoints.facechain - INFO - FaceChain model initialization attempt complete.
+2025-05-18 21:51:22,685 - datasets - INFO - PyTorch version 2.7.0+cu128 available.
+2025-05-18 21:51:22,994 - app.api.endpoints.facechain - INFO - Application startup: Initializing FaceChain model...
+2025-05-18 21:51:22,995 - app.api.endpoints.facechain - INFO - Initializing FaceChain GenPortrait model...
+2025-05-18 21:51:49,541 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:51:49,542 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:51:49,543 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:51:49,543 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:51:49,543 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:51:49,543 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:51:49,543 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:51:49,544 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:51:49,544 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:51:49,544 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:51:49,544 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:51:49,544 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:51:49,544 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:51:49,544 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:51:49,545 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:51:49,545 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:51:49,545 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:51:49,545 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:51:49,545 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:51:49,545 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:51:49,545 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:52:24,430 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:52:24,432 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:52:24,432 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:52:24,432 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:52:24,432 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:52:24,432 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:52:24,433 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:52:24,433 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:52:24,433 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:52:24,433 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:52:24,433 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:52:24,433 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:52:24,433 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:52:24,433 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:52:24,433 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:52:24,433 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:52:24,433 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:52:24,434 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:52:24,434 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:52:24,434 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:52:24,434 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:53:25,257 - mmcv - INFO - initialize PAFPN with init_cfg {'type': 'Xavier', 'layer': 'Conv2d', 'distribution': 'uniform'}
+2025-05-18 21:53:25,259 - mmcv - INFO - 
+lateral_convs.0.conv.weight - torch.Size([16, 64, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:53:25,259 - mmcv - INFO - 
+lateral_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:53:25,259 - mmcv - INFO - 
+lateral_convs.1.conv.weight - torch.Size([16, 120, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:53:25,260 - mmcv - INFO - 
+lateral_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:53:25,260 - mmcv - INFO - 
+lateral_convs.2.conv.weight - torch.Size([16, 160, 1, 1]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:53:25,260 - mmcv - INFO - 
+lateral_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:53:25,260 - mmcv - INFO - 
+fpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:53:25,260 - mmcv - INFO - 
+fpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:53:25,261 - mmcv - INFO - 
+fpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:53:25,261 - mmcv - INFO - 
+fpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:53:25,261 - mmcv - INFO - 
+fpn_convs.2.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:53:25,261 - mmcv - INFO - 
+fpn_convs.2.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:53:25,261 - mmcv - INFO - 
+downsample_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:53:25,261 - mmcv - INFO - 
+downsample_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:53:25,262 - mmcv - INFO - 
+downsample_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:53:25,262 - mmcv - INFO - 
+downsample_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:53:25,262 - mmcv - INFO - 
+pafpn_convs.0.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:53:25,262 - mmcv - INFO - 
+pafpn_convs.0.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:53:25,262 - mmcv - INFO - 
+pafpn_convs.1.conv.weight - torch.Size([16, 16, 3, 3]): 
+XavierInit: gain=1, distribution=uniform, bias=0 
+ 
+2025-05-18 21:53:25,262 - mmcv - INFO - 
+pafpn_convs.1.conv.bias - torch.Size([16]): 
+The value is the same before and after calling `init_weights` of PAFPN  
+ 
+2025-05-18 21:53:41,664 - app.api.endpoints.facechain - INFO - FaceChain GenPortrait model initialized successfully.
+2025-05-18 21:53:41,664 - app.api.endpoints.facechain - INFO - Loading FaceChain styles from D:\xroting\monna\monna-backend\models\facechain\styles...
+2025-05-18 21:53:41,669 - app.api.endpoints.facechain - INFO - Successfully loaded 75 FaceChain styles.
+2025-05-18 21:53:41,669 - app.api.endpoints.facechain - INFO - FaceChain model initialization attempt complete.

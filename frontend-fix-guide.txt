@@ -1,0 +1,57 @@
+# 前端App修复指南
+
+当前前端App存在两个问题需要修复：
+
+## 问题1: EnvironmentSwitcher组件中的startsWith错误
+
+在`src/components/EnvironmentSwitcher.js`文件中，约第75行：
+
+```javascript
+const isHttpMode = testResults.apiBaseUrl.startsWith('http://');
+```
+
+这里尝试访问`testResults.apiBaseUrl`属性，但该属性不存在，导致错误：
+`TypeError: Cannot read property 'startsWith' of undefined`
+
+### 修复方法：
+
+将上述代码修改为：
+
+```javascript
+// 修复startsWith错误，确保使用有效的URL属性
+const apiBaseUrl = testResults.nodeApiBaseUrl || testResults.pythonApiBaseUrl || '';
+const isHttpMode = apiBaseUrl.startsWith('http://');
+```
+
+同时，还需要在相同函数中更新对`testResults.apiBaseUrl`的显示：
+```javascript
+<Text style={styles.apiUrl}>{apiBaseUrl}</Text>
+```
+
+## 问题2: 前端连接测试使用了错误的URL
+
+在`src/services/api.js`文件中，约第46行：
+
+```javascript
+const pythonEndpoints = [
+  { url: `${PYTHON_FACECHAIN_API_BASE_URL}/facechain/tasks/test-id`, name: "Python FastAPI Facechain Task Test" }
+];
+```
+
+这里使用了旧的测试URL，需要改为新的测试端点。
+
+### 修复方法：
+
+将上述代码修改为：
+
+```javascript
+const pythonEndpoints = [
+  { url: `${PYTHON_FACECHAIN_API_BASE_URL}/facechain/connection-test`, name: "Python FastAPI Facechain Connection Test" }
+];
+```
+
+## 应用修复
+
+1. 修改这两个文件
+2. 重新启动前端App
+3. 现在"测试服务器连接"功能应该可以正常工作，且不再显示错误 
