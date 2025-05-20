@@ -1,0 +1,17 @@
+slugify
+diffusers==0.29.0
+peft==0.11.1
+onnxruntime-gpu    # or onnxruntime if you don’t have CUDA
+modelscope
+controlnet_aux==0.0.6
+opencv-python
+mmcv-full==1.7.2
+mmdet==2.26.0
+mediapipe==0.10.5
+edge_tts
+protobuf==3.20.1
+fsspec==2023.9.2
+gradio==3.48.0
+datasets==2.16.0
+simplejson
+sortedcontainers
