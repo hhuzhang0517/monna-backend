@@ -255,14 +255,23 @@ async def generate_portrait(
         "results": []
     }
     
-    logger.info(f"Task {task_id}: Attempting to add process_facechain_task to background tasks.")
-    # 在后台启动处理任务
-    background_tasks.add_task(
-        process_facechain_task,
-        task_id=task_id,
-        # 暂时传递简化参数或固定值进行测试
-        message_for_debug="Hello from background task!" 
-    )
+    # 使用队列系统处理任务
+    from app.worker.queue import add_task
+    
+    # 准备任务数据
+    task_data = {
+        "input_files": input_files,
+        "output_dir": str(output_dir),
+        "style": style,
+        "count": num_generate,
+        "multiplier_style": multiplier_style,
+        "use_pose": use_pose,
+        "pose_file": str(pose_file_path) if pose_file_path else None,
+    }
+    
+    # 添加到任务队列
+    add_task(task_id, task_data)
+    logger.info(f"任务 {task_id} 已添加到队列，等待处理")
     
     return ImageUploadResponse(
         task_id=task_id,
@@ -296,15 +305,17 @@ async def get_task_status(task_id: str = Path(..., description="任务ID"), requ
             pythonApiBaseUrl=api_base_url  # 为前端提供Python API的基础URL
         )
     
-    if task_id not in facechain_tasks:
-        raise HTTPException(status_code=404, detail="任务不存在")
+    # 从队列系统获取任务状态
+    from app.worker.queue import get_task_status
     
-    task = facechain_tasks[task_id]
+    task = get_task_status(task_id)
+    if not task:
+        raise HTTPException(status_code=404, detail="任务不存在")
     
     # 将结果文件路径转换为URL
     result_urls = []
-    if task.get("status") == TaskStatus.COMPLETED and task.get("results"):
-        for result_file in task["results"]:
+    if task.get("status") == TaskStatus.COMPLETED and task.get("result"):
+        for result_file in task["result"]:
             # 提取相对路径
             rel_path = os.path.relpath(result_file, str(settings.BASE_DIR))
             # 构造URL
@@ -316,12 +327,12 @@ async def get_task_status(task_id: str = Path(..., description="任务ID"), requ
         status=task["status"],
         progress=task["progress"],
         created_at=task["created_at"],
-        style=task["style"],
-        count=task["num_generate"],
+        style=task.get("style", ""),
+        count=task.get("count", 0),
         result_urls=result_urls,
         message=task.get("message", ""),
-        apiBaseUrl=api_base_url,  # 添加此字段以修复前端startsWith错误
-        pythonApiBaseUrl=api_base_url  # 为前端提供Python API的基础URL
+        apiBaseUrl=api_base_url,
+        pythonApiBaseUrl=api_base_url
     )
 
 @router.delete("/tasks/{task_id}")
@@ -331,10 +342,12 @@ async def delete_task(task_id: str = Path(..., description="任务ID")):
     
     - **task_id**: 任务ID
     """
-    if task_id not in facechain_tasks:
-        raise HTTPException(status_code=404, detail="任务不存在")
+    # 从队列系统获取任务状态
+    from app.worker.queue import get_task_status, tasks_status
     
-    task = facechain_tasks[task_id]
+    task = get_task_status(task_id)
+    if not task:
+        raise HTTPException(status_code=404, detail="任务不存在")
     
     # 删除输入文件目录
     input_dir = settings.UPLOAD_DIR / "facechain" / task_id
@@ -342,210 +355,175 @@ async def delete_task(task_id: str = Path(..., description="任务ID")):
         shutil.rmtree(input_dir)
     
     # 删除输出文件目录
-    output_dir = PathLib(task["output_dir"])
+    output_dir = PathLib(task.get("output_dir", ""))
     if os.path.exists(output_dir):
         shutil.rmtree(output_dir)
     
     # 删除任务记录
-    del facechain_tasks[task_id]
+    if task_id in tasks_status:
+        del tasks_status[task_id]
     
     return {"message": f"任务 {task_id} 及相关文件已删除"}
 
 # 后台处理函数
 async def process_facechain_task(
     task_id: str,
-    message_for_debug: str # 简化参数列表用于测试
-    # input_files: List[str], # 暂时注释掉复杂参数
-    # output_dir: str,
-    # style: str,
-    # num_generate: int,
-    # multiplier_style: float,
-    # use_pose: bool,
-    # pose_file: Optional[str]
+    message_for_debug: str = "默认调用"
 ):
-    """处理FaceChain生成任务 (DEBUG SIMPLIFIED VERSION - STEP 3 AsyncIO Fix)"""
-    # --- STEP 1: Direct file write for absolute confirmation ---
+    """处理FaceChain生成任务"""
+    # 获取任务数据
+    from app.worker.queue import get_task_status, update_task_status
+    
+    # --- 调试日志记录 ---
     debug_signal_file = settings.BASE_DIR / "logs" / "debug_task_signal.txt"
     try:
         os.makedirs(settings.BASE_DIR / "logs", exist_ok=True)
         with open(debug_signal_file, "a", encoding='utf-8') as f:
-            f.write(f"{time.time()}: process_facechain_task CALLED for {task_id} with message: {message_for_debug}\\n")
+            f.write(f"{time.time()}: process_facechain_task CALLED for {task_id} with message: {message_for_debug}\n")
     except Exception as e_debug_write:
-        sys.stdout.write(f"CRITICAL DEBUG: Failed to write to {debug_signal_file}: {e_debug_write}\\n")
+        sys.stdout.write(f"CRITICAL DEBUG: Failed to write to {debug_signal_file}: {e_debug_write}\n")
         sys.stdout.flush()
 
-
-    # --- STEP 2: Original debug prints and logs ---\
-    sys.stdout.write(f"DEBUG PRINT (after signal file): process_facechain_task for {task_id} CALLED with message: {message_for_debug}\\n")
-    sys.stdout.flush()
-    logger.info(f"--- DEBUG LOGGER (after signal file) --- process_facechain_task for task_id '{task_id}' CALLED with message: '{message_for_debug}' ---")
+    logger.info(f"--- DEBUG LOGGER --- process_facechain_task for task_id '{task_id}' CALLED with message: '{message_for_debug}' ---")
+    
+    # 获取任务数据
+    task_data = get_task_status(task_id)
+    if not task_data:
+        logger.error(f"任务 {task_id} 不存在于队列系统中")
+        return
     
     try:
-        # 模拟一些工作
-        logger.info(f"--- DEBUG LOGGER --- Task {task_id}: Simulating work (5s async sleep)...")
-        await asyncio.sleep(5)
-        
-        if task_id in facechain_tasks:
-            facechain_tasks[task_id]["status"] = TaskStatus.PROCESSING 
-            facechain_tasks[task_id]["message"] = "Debug task processed."
-            facechain_tasks[task_id]["progress"] = 50
-            logger.info(f"--- DEBUG LOGGER --- Task {task_id} status updated after debug processing.")
-        else:
-            logger.error(f"--- DEBUG LOGGER --- Task {task_id} not found in facechain_tasks during debug processing.")
-            sys.stdout.write(f"DEBUG PRINT: Task {task_id} not found in facechain_tasks during debug processing.\\n")
-            sys.stdout.flush()
+        # 更新任务状态为处理中
+        update_task_status(task_id, TaskStatus.PROCESSING, 10)
+        logger.info(f"开始处理FaceChain任务 {task_id} for style '{task_data.get('style', 'unknown')}'")
 
-        logger.info(f"--- DEBUG LOGGER --- Task {task_id}: Simulating more work (5s async sleep)...")
-        await asyncio.sleep(5)
-        if task_id in facechain_tasks:
-            facechain_tasks[task_id]["status"] = TaskStatus.COMPLETED
-            facechain_tasks[task_id]["message"] = "Debug task completed."
-            facechain_tasks[task_id]["progress"] = 100
-            logger.info(f"--- DEBUG LOGGER --- Task {task_id} status updated to COMPLETED after debug processing.")
-        else:
-            logger.error(f"--- DEBUG LOGGER --- Task {task_id} not found in facechain_tasks for completion.")
-            sys.stdout.write(f"DEBUG PRINT: Task {task_id} not found for completion.\\n")
-            sys.stdout.flush()
+        if gen_portrait_instance is None or loaded_styles is None:
+            logger.error(f"Task {task_id}: FaceChain model or styles not initialized. Aborting task.")
+            update_task_status(task_id, TaskStatus.FAILED, progress=100)
+            return
 
-    except Exception as e:
-        logger.error(f"--- DEBUG LOGGER --- Error in simplified process_facechain_task for {task_id}: {e}", exc_info=True) 
-        sys.stdout.write(f"DEBUG PRINT: Error in simplified process_facechain_task for {task_id}: {e}\\n")
-        sys.stdout.flush()
-        if task_id in facechain_tasks:
-            facechain_tasks[task_id]["status"] = TaskStatus.FAILED
-            facechain_tasks[task_id]["message"] = f"Debug task failed: {str(e)}"
-    # 以下是原始的 process_facechain_task 函数体，暂时注释掉
-    # try: 
-    #     logger.info(f"开始处理FaceChain任务 {task_id} (直接调用) for style '{style}'")
+        try:
+            # 更新进度
+            update_task_status(task_id, TaskStatus.PROCESSING, 20)
 
-    #     if gen_portrait_instance is None or loaded_styles is None:
-    #         logger.error(f"Task {task_id}: FaceChain model or styles not initialized. Aborting task.")
-    #         if task_id in facechain_tasks:
-    #             facechain_tasks[task_id]["status"] = TaskStatus.FAILED
-    #             facechain_tasks[task_id]["message"] = "FaceChain模型或风格未初始化"
-    #             facechain_tasks[task_id]["progress"] = 100 
-    #         else:
-    #             logger.error(f"Task {task_id} not found when trying to set model init error.")
-    #         return
+            # 获取任务参数
+            input_files = task_data.get('input_files', [])
+            output_dir = task_data.get('output_dir')
+            style = task_data.get('style')
+            num_generate = task_data.get('count', 5)
+            multiplier_style = task_data.get('multiplier_style', 0.25)
+            use_pose = task_data.get('use_pose', False)
+            pose_file = task_data.get('pose_file')
 
-    #     try:
-    #         facechain_tasks[task_id]["status"] = TaskStatus.PROCESSING
-    #         facechain_tasks[task_id]["progress"] = 10
-
-    #         primary_input_path = input_files[0]
-
-    #         target_style_config = None
-    #         for s_config in loaded_styles:
-    #             if s_config['name'] == style:
-    #                 target_style_config = s_config
-    #                 break
+            if not input_files:
+                raise ValueError("没有提供输入图像文件")
             
-    #         if not target_style_config:
-    #             logger.error(f"错误: 未找到指定的风格 '{style}' for task {task_id}")
-    #             facechain_tasks[task_id]["status"] = TaskStatus.FAILED
-    #             facechain_tasks[task_id]["message"] = f"未找到风格: {style}"
-    #             facechain_tasks[task_id]["progress"] = 100
-    #             return
+            primary_input_path = input_files[0]
 
-    #         facechain_tasks[task_id]["progress"] = 20
+            # 查找目标风格配置
+            target_style_config = None
+            for s_config in loaded_styles:
+                if s_config['name'] == style:
+                    target_style_config = s_config
+                    break
             
-    #         model_id = target_style_config['model_id']
-    #         base_model_idx = 0 
+            if not target_style_config:
+                logger.error(f"错误: 未找到指定的风格 '{style}' for task {task_id}")
+                update_task_status(task_id, TaskStatus.FAILED, 100)
+                return
+
+            update_task_status(task_id, TaskStatus.PROCESSING, 30)
             
-    #         current_cwd = os.getcwd()
-    #         style_model_path_for_inference = None
-    #         pos_prompt_for_inference = ""
+            # 准备推理参数
+            model_id = target_style_config['model_id']
+            base_model_idx = 0 
             
-    #         try:
-    #             os.chdir(facechain_models_dir) 
-    #             if model_id is None:
-    #                 style_model_path_for_inference = None
-    #                 pos_prompt_for_inference = pos_prompt_with_cloth.format(add_prompt_style=target_style_config['add_prompt_style'])
-    #             else:
-    #                 model_dir_local = model_id if os.path.exists(model_id) else snapshot_download(model_id, revision=target_style_config['revision'])
-    #                 style_model_path_for_inference = os.path.join(model_dir_local, target_style_config['bin_file'])
-    #                 pos_prompt_for_inference = pos_prompt_with_style.format(add_prompt_style=target_style_config['add_prompt_style'])
-    #         finally:
-    #             os.chdir(current_cwd)
-
-    #         pose_image_for_inference = None
-    #         if use_pose and pose_file and os.path.exists(pose_file):
-    #             pose_image_for_inference = pose_file
+            current_cwd = os.getcwd()
+            style_model_path_for_inference = None
+            pos_prompt_for_inference = ""
             
-    #         logger.info(f"Task {task_id} FaceChain inference params: num_generate={num_generate}, base_model_idx={base_model_idx}, "
-    #                     f"style_model_path='{style_model_path_for_inference}', pos_prompt='{pos_prompt_for_inference[:60]}...', "
-    #                     f"input_img_path='{primary_input_path}', pose_image='{pose_image_for_inference}', "
-    #                     f"multiplier_style={multiplier_style}")
+            try:
+                # 切换到FaceChain模型目录进行处理
+                os.chdir(facechain_models_dir) 
+                if model_id is None:
+                    style_model_path_for_inference = None
+                    pos_prompt_for_inference = pos_prompt_with_cloth.format(target_style_config['add_prompt_style'])
+                else:
+                    model_dir_local = model_id if os.path.exists(model_id) else snapshot_download(model_id, revision=target_style_config['revision'])
+                    style_model_path_for_inference = os.path.join(model_dir_local, target_style_config['bin_file'])
+                    pos_prompt_for_inference = pos_prompt_with_style.format(target_style_config['add_prompt_style'])
+            finally:
+                os.chdir(current_cwd)
 
-    #         facechain_tasks[task_id]["progress"] = 30
-    #         outputs_np_arrays = []
-    #         task_specific_output_dir = PathLib(output_dir)
-
-    #         try:
-    #             logger.info(f"Task {task_id}: Changing CWD to {facechain_models_dir} for inference.")
-    #             os.chdir(facechain_models_dir) 
-    #             outputs_np_arrays = gen_portrait_instance(
-    #                 num_images=num_generate,
-    #                 base_model_index=base_model_idx,
-    #                 style_model_path=style_model_path_for_inference,
-    #                 pos_prompt=pos_prompt_for_inference,
-    #                 neg_prompt=neg_prompt, 
-    #                 input_image_path=primary_input_path, 
-    #                 pose_image_path=pose_image_for_inference, 
-    #                 multiplier_style=multiplier_style
-    #             )
-    #             logger.info(f"Task {task_id}: Inference call completed in CWD: {os.getcwd()}")
-    #         finally:
-    #             os.chdir(current_cwd) 
-    #             logger.info(f"Task {task_id}: Restored CWD to {current_cwd}")
-
-    #         facechain_tasks[task_id]["progress"] = 80
-    #         logger.info(f"Task {task_id}: FaceChain inference completed, got {len(outputs_np_arrays)} image arrays.")
-
-    #         result_image_paths = []
-    #         if not outputs_np_arrays:
-    #             logger.warning(f"Task {task_id}: FaceChain inference returned no image arrays.")
-
-    #         for i, out_np_array in enumerate(outputs_np_arrays):
-    #             output_image_filename = f"result_{i}.png"
-    #             output_image_filepath = task_specific_output_dir / output_image_filename
-    #             try:
-    #                 if not isinstance(out_np_array, np.ndarray):
-    #                     logger.error(f"Task {task_id}: Output {i} is not a numpy array, type: {type(out_np_array)}. Skipping save.")
-    #                     continue
-    #                 cv2.imwrite(str(output_image_filepath), out_np_array)
-    #                 result_image_paths.append(str(output_image_filepath))
-    #                 logger.info(f"Task {task_id}: Saved generated image to {output_image_filepath}")
-    #             except Exception as e_save:
-    #                 logger.error(f"Task {task_id}: Error saving image {output_image_filepath}: {e_save}")
+            # 处理姿势图像
+            pose_image_for_inference = None
+            if use_pose and pose_file and os.path.exists(pose_file):
+                pose_image_for_inference = pose_file
             
-    #         if not result_image_paths and outputs_np_arrays:
-    #              logger.error(f"Task {task_id}: Images were generated but failed to save.")
-    #              raise Exception("图像已生成但保存失败")
-    #         elif not result_image_paths: 
-    #             logger.error(f"Task {task_id}: No images were generated by FaceChain.")
-    #             raise Exception("FaceChain未能生成任何图像")
+            logger.info(f"Task {task_id} FaceChain inference params: num_generate={num_generate}, base_model_idx={base_model_idx}, "
+                      f"style_model_path='{style_model_path_for_inference}', pos_prompt='{pos_prompt_for_inference[:60]}...', "
+                      f"input_img_path='{primary_input_path}', pose_image='{pose_image_for_inference}', "
+                      f"multiplier_style={multiplier_style}")
 
-    #         facechain_tasks[task_id]["status"] = TaskStatus.COMPLETED
-    #         facechain_tasks[task_id]["progress"] = 100
-    #         facechain_tasks[task_id]["results"] = result_image_paths
-    #         facechain_tasks[task_id]["message"] = f"成功生成 {len(result_image_paths)} 张AI人像"
-    #         logger.info(f"Task {task_id} completed successfully.")
+            update_task_status(task_id, TaskStatus.PROCESSING, 40)
+            outputs_np_arrays = []
+            task_specific_output_dir = PathLib(output_dir)
 
-    #     except Exception as e_inner_task: 
-    #         logger.exception(f"处理FaceChain任务 {task_id} 内部发生错误: {e_inner_task}")
-    #         if task_id in facechain_tasks:
-    #             facechain_tasks[task_id]["status"] = TaskStatus.FAILED
-    #             facechain_tasks[task_id]["message"] = f"内部处理错误: {str(e_inner_task)}"
-    #             facechain_tasks[task_id]["progress"] = 100  
-    #         else:
-    #             logger.error(f"Task {task_id} not found when handling inner exception.")
+            try:
+                # 执行FaceChain推理
+                logger.info(f"Task {task_id}: Changing CWD to {facechain_models_dir} for inference.")
+                os.chdir(facechain_models_dir) 
+                outputs_np_arrays = gen_portrait_instance(
+                    num_images=num_generate,
+                    base_model_index=base_model_idx,
+                    style_model_path=style_model_path_for_inference,
+                    pos_prompt=pos_prompt_for_inference,
+                    neg_prompt=neg_prompt, 
+                    input_image_path=primary_input_path, 
+                    pose_image_path=pose_image_for_inference, 
+                    multiplier_style=multiplier_style
+                )
+                logger.info(f"Task {task_id}: Inference call completed in CWD: {os.getcwd()}")
+            finally:
+                os.chdir(current_cwd) 
+                logger.info(f"Task {task_id}: Restored CWD to {current_cwd}")
+
+            update_task_status(task_id, TaskStatus.PROCESSING, 80)
+            logger.info(f"Task {task_id}: FaceChain inference completed, got {len(outputs_np_arrays)} image arrays.")
+
+            # 保存生成的图像
+            result_image_paths = []
+            if not outputs_np_arrays:
+                logger.warning(f"Task {task_id}: FaceChain inference returned no image arrays.")
+
+            for i, out_np_array in enumerate(outputs_np_arrays):
+                output_image_filename = f"result_{i}.png"
+                output_image_filepath = task_specific_output_dir / output_image_filename
+                try:
+                    if not isinstance(out_np_array, np.ndarray):
+                        logger.error(f"Task {task_id}: Output {i} is not a numpy array, type: {type(out_np_array)}. Skipping save.")
+                        continue
+                    cv2.imwrite(str(output_image_filepath), out_np_array)
+                    result_image_paths.append(str(output_image_filepath))
+                    logger.info(f"Task {task_id}: Saved generated image to {output_image_filepath}")
+                except Exception as e_save:
+                    logger.error(f"Task {task_id}: Error saving image {output_image_filepath}: {e_save}")
+            
+            if not result_image_paths and outputs_np_arrays:
+                 logger.error(f"Task {task_id}: Images were generated but failed to save.")
+                 raise Exception("图像已生成但保存失败")
+            elif not result_image_paths: 
+                logger.error(f"Task {task_id}: No images were generated by FaceChain.")
+                raise Exception("FaceChain未能生成任何图像")
+
+            # 任务完成，更新状态
+            update_task_status(task_id, TaskStatus.COMPLETED, 100, result=result_image_paths)
+            logger.info(f"Task {task_id} completed successfully.")
+
+        except Exception as e_inner_task: 
+            logger.exception(f"处理FaceChain任务 {task_id} 内部发生错误: {e_inner_task}")
+            update_task_status(task_id, TaskStatus.FAILED, 100)
     
-    # except Exception as e_outer_task: 
-    #     logger.exception(f"FaceChain任务 {task_id} 顶层处理中发生严重错误: {e_outer_task}")
-    #     if task_id in facechain_tasks:
-    #         facechain_tasks[task_id]["status"] = TaskStatus.FAILED
-    #         facechain_tasks[task_id]["message"] = f"顶层处理错误: {str(e_outer_task)}"
-    #         facechain_tasks[task_id]["progress"] = 100
-    #     else:
-    #         logger.error(f"Task {task_id} (or its initial record) not found in facechain_tasks during top-level exception handling for error: {e_outer_task}") 
+    except Exception as e_outer_task: 
+        logger.exception(f"FaceChain任务 {task_id} 顶层处理中发生严重错误: {e_outer_task}")
+        update_task_status(task_id, TaskStatus.FAILED, 100) 

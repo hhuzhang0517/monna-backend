@@ -21,4 +21,9 @@ celery_app.conf.update(
     worker_max_tasks_per_child=200,  # 每个worker处理的最大任务数
     task_soft_time_limit=300,  # 软超时(5分钟)
     task_time_limit=600,  # 硬超时(10分钟)
+    # 任务路由配置，将FaceChain任务路由到facechain_tasks队列
+    task_routes={
+        'app.worker.tasks.process_facechain_portrait': {'queue': 'facechain_tasks'},
+        'app.worker.tasks.process_facechain_inpaint': {'queue': 'facechain_tasks'},
+    }
 )

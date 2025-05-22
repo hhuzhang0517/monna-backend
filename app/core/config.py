@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     UPLOAD_DIR: Path = BASE_DIR / "data" / "uploads"
     RESULTS_DIR: Path = BASE_DIR / "data" / "results"
     MODELS_DIR: Path = BASE_DIR / "models"
+    LOGS_DIR: Path = BASE_DIR / "logs"  # 添加日志目录
     
     # 任务队列配置
     REDIS_HOST: str = os.getenv("REDIS_HOST", "localhost")
@@ -62,4 +63,4 @@ settings = Settings()
 # 确保目录存在
 os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
 os.makedirs(settings.RESULTS_DIR, exist_ok=True)
-os.makedirs(settings.BASE_DIR / "logs", exist_ok=True)  # 创建日志目录
+os.makedirs(settings.LOGS_DIR, exist_ok=True)  # 创建日志目录

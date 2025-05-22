@@ -11,21 +11,36 @@ class TaskStatus(str, Enum):
 
 class ImageUploadResponse(BaseModel):
     task_id: str
-    status: TaskStatus = TaskStatus.PENDING
+    status: TaskStatus
     message: str
     
+    class Config:
+        extra = "allow"
+
 class TaskStatusResponse(BaseModel):
     task_id: str
     status: TaskStatus
-    progress: Optional[float] = None
-    result_url: Optional[str] = None  # 兼容单个结果的情况
-    result_urls: Optional[List[str]] = None  # 支持多个结果URL
-    mask_url: Optional[str] = None  # 分割掩码URL
-    message: Optional[str] = None
-    created_at: float = Field(default_factory=time.time)
-    style: Optional[str] = None  # 风格类型
-    count: Optional[int] = None  # 生成图片数量
+    progress: int = 0
+    created_at: float
+    result_urls: List[str] = []
+    message: str = ""
+    apiBaseUrl: str = ""
     
+    class Config:
+        extra = "allow"
+
+class TaskData(BaseModel):
+    task_id: str
+    task_type: str
+    parameters: Dict[str, Any] = Field(default_factory=dict)
+    created_at: float = Field(default_factory=time.time)
+    status: TaskStatus = TaskStatus.PENDING
+    progress: int = 0
+    result: Any = None
+    
+    class Config:
+        extra = "allow"
+
 class BackgroundRemovalOptions(BaseModel):
     replace_background: bool = False
     background_color: Optional[str] = None  # 如 "#ff0000" 或 "transparent"
