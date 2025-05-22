@@ -1,4 +1,4 @@
-# 启动FaceChain前端兼容代理服务器
+﻿# 启动FaceChain前端兼容代理服务器
 Write-Host "正在启动前端兼容代理服务器..." -ForegroundColor Green
 
 # 激活Python虚拟环境

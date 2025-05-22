@@ -66,6 +66,38 @@ async def startup_event():
     facechain_logger.info("Application startup: Initializing FaceChain model...")
     initialize_facechain_model() # 调用模型和风格初始化
     facechain_logger.info("FaceChain model initialization attempt complete.")
+    
+    # 初始化任务队列系统
+    from app.worker.queue import initialize_queue
+    await initialize_queue()
+    facechain_logger.info("In-memory task queue system initialized.")
+    
+    # 初始化Redis队列连接
+    try:
+        from app.worker.redis_queue import initialize_redis
+        redis_initialized = await initialize_redis()
+        if redis_initialized:
+            facechain_logger.info("Redis queue connection initialized successfully.")
+        else:
+            facechain_logger.warning("Failed to initialize Redis queue connection. Will use in-memory queue only.")
+    except Exception as e:
+        facechain_logger.error(f"Error initializing Redis queue: {str(e)}")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    facechain_logger.info("Application shutdown: Cleaning up resources...")
+    # 关闭任务队列系统
+    from app.worker.queue import shutdown_queue
+    shutdown_queue()
+    facechain_logger.info("In-memory task queue system shutdown complete.")
+    
+    # 关闭Redis连接
+    try:
+        from app.worker.redis_queue import shutdown_redis
+        await shutdown_redis()
+        facechain_logger.info("Redis connection shutdown complete.")
+    except Exception as e:
+        facechain_logger.error(f"Error shutting down Redis connection: {str(e)}")
 
 # 设置CORS
 app.add_middleware(

@@ -194,4 +194,114 @@ python -m venv venv310
 - `proxy-server.py`: 前端兼容代理服务器
 - `start-facechain-service.ps1`: 启动FaceChain服务脚本
 - `start-proxy.ps1`: 启动代理服务器脚本
-- `update-frontend-config.ps1`: 更新前端配置脚本 
+- `update-frontend-config.ps1`: 更新前端配置脚本
+
+# Monna AI 后端服务
+
+这是Monna AI项目的后端服务，提供AI图像处理功能，包括FaceChain AI人像生成。
+
+## 系统架构
+
+系统架构包括以下组件：
+
+1. **FastAPI 应用服务器**：处理HTTP请求和响应，提供REST API接口。
+2. **任务队列系统**：管理和处理异步任务，如AI人像生成。
+3. **FaceChain AI模型**：提供AI人像生成功能。
+4. **文件存储系统**：管理上传的图像和生成的结果。
+
+### 工作流程
+
+1. **接口初始化**: 启动后端服务时，首先初始化FastAPI接口和FaceChain AI模型。
+2. **任务队列初始化**: 系统启动任务队列处理器，监听任务队列。
+3. **任务处理**: 
+   - 用户通过API上传图像和处理参数
+   - 后端将任务添加到队列
+   - 队列处理器从队列中取出任务并调用FaceChain处理
+   - 处理完成后更新任务状态
+4. **结果获取**: 
+   - 前端通过API查询任务状态
+   - 当任务完成时，返回处理结果给前端
+
+## 功能模块
+
+### AI人像生成 (FaceChain)
+
+使用FaceChain AI模型生成个性化人像照片。支持多种风格和姿势控制。
+
+#### API端点
+
+- `POST /api/v1/facechain/generate-portrait`: 提交AI人像生成任务
+- `GET /api/v1/facechain/tasks/{task_id}`: 获取任务状态和结果
+- `DELETE /api/v1/facechain/tasks/{task_id}`: 删除任务和相关文件
+
+## 技术栈
+
+- **Web框架**: FastAPI
+- **AI模型**: FaceChain
+- **任务队列**: 内存队列系统
+- **文件处理**: Python标准库
+
+## 安装和运行
+
+### 环境要求
+
+- Python 3.10+
+- 虚拟环境 (推荐使用venv或conda)
+
+### 安装步骤
+
+1. 克隆仓库:
+```
+git clone <repository-url>
+cd monna-backend
+```
+
+2. 使用虚拟环境:
+```
+# 使用项目自带的Python 3.10 虚拟环境
+.\venv310\Scripts\activate  # Windows
+```
+
+3. 启动服务:
+```
+python main.py
+```
+服务将在 http://localhost:8000 启动，API文档可在 http://localhost:8000/api/v1/docs 访问。
+
+## 开发指南
+
+### 代码结构
+
+```
+monna-backend/
+│
+├── app/                    # 应用代码
+│   ├── api/                # API定义
+│   │   ├── endpoints/      # API端点实现
+│   │   └── routes.py       # API路由定义
+│   │
+│   ├── core/               # 核心配置
+│   │
+│   ├── models/             # 数据模型
+│   │
+│   ├── services/           # 业务服务
+│   │
+│   ├── utils/              # 工具函数
+│   │
+│   └── worker/             # 任务处理
+│       └── queue.py        # 任务队列实现
+│
+├── data/                   # 数据存储
+│   ├── uploads/            # 上传文件
+│   │
+│   └── outputs/            # 输出结果
+│
+├── logs/                   # 日志文件
+│
+├── models/                 # AI模型
+│   └── facechain/          # FaceChain模型
+│
+├── venv310/                # Python 3.10 虚拟环境
+│
+└── main.py                 # 主入口文件
+``` 

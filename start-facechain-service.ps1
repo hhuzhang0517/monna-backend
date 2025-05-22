@@ -1,43 +1,55 @@
-# FaceChain服务启动脚本 (ASCII编码)
-Write-Host "正在启动FaceChain服务..." -ForegroundColor Green
+﻿# FaceChain后端服务启动脚本
 
-# 激活Python虚拟环境
-$venvPath = "./venv310/Scripts/Activate.ps1"
-if (Test-Path $venvPath) {
-    & $venvPath
-    Write-Host "已激活虚拟环境 venv310" -ForegroundColor Green
-} else {
-    Write-Host "警告: 虚拟环境不存在，尝试使用系统Python" -ForegroundColor Yellow
-}
+<#
+.SYNOPSIS
+    启动Monna AI FaceChain后端服务
+.DESCRIPTION
+    该脚本激活Python 3.10虚拟环境并启动FastAPI后端服务，
+    包括任务队列系统和FaceChain AI模型初始化。
+.NOTES
+    版本:      1.0
+    作者:      Monna AI团队
+    日期:      2023-10-01
+#>
 
-# 创建必要的目录
-$logDir = "./logs"
-$uploadDir = "./data/uploads/facechain"
-$outputDir = "./data/outputs"
-
-if (-not (Test-Path $logDir)) {
-    New-Item -ItemType Directory -Path $logDir -Force
-    Write-Host "创建日志目录: $logDir" -ForegroundColor Green
-}
-
-if (-not (Test-Path $uploadDir)) {
-    New-Item -ItemType Directory -Path $uploadDir -Force
-    Write-Host "创建上传目录: $uploadDir" -ForegroundColor Green
-}
-
-if (-not (Test-Path $outputDir)) {
-    New-Item -ItemType Directory -Path $outputDir -Force
-    Write-Host "创建输出目录: $outputDir" -ForegroundColor Green
-}
-
-# 检查Python模块是否可用
-Write-Host "检查Python模块依赖..." -ForegroundColor Green
-python -c "import datasets; print(f'datasets version: {datasets.__version__}')" 
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "错误: 缺少必要的Python模块 'datasets'，请运行: pip install datasets==2.16.0" -ForegroundColor Red
+# 检查虚拟环境是否存在
+$venvPath = ".\venv310"
+if (-not (Test-Path "$venvPath\Scripts\activate.ps1")) {
+    Write-Host "错误: 未找到Python 3.10虚拟环境，请确保在正确的目录中运行脚本。" -ForegroundColor Red
     exit 1
 }
 
-# 启动FastAPI应用程序 - 使用Python直接执行而不是uvicorn命令
-Write-Host "启动FastAPI应用..." -ForegroundColor Green
-python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload 
+# 设置环境变量
+$env:PYTHONIOENCODING = "utf-8"
+
+# 激活虚拟环境并启动服务
+Write-Host "正在启动Monna AI FaceChain后端服务..." -ForegroundColor Green
+Write-Host "激活Python 3.10虚拟环境..." -ForegroundColor Cyan
+
+try {
+    & "$venvPath\Scripts\activate"
+    
+    # 检查activation是否成功
+    #if ($LASTEXITCODE -ne 0) {
+     #   Write-Host "错误: 虚拟环境激活失败。" -ForegroundColor Red
+    #    exit 1
+    #}
+    
+    Write-Host "启动FastAPI服务..." -ForegroundColor Cyan
+    python --version
+    python main.py
+    
+    # 如果服务退出，捕获错误码
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "错误: 服务异常退出，错误码 $LASTEXITCODE" -ForegroundColor Red
+    }
+}
+catch {
+    Write-Host "发生错误: $_" -ForegroundColor Red
+}
+finally {
+    # 脚本结束时确保虚拟环境被正确停用
+    if (Get-Command deactivate -ErrorAction SilentlyContinue) {
+        deactivate
+    }
+} 

@@ -1,4 +1,4 @@
-# FaceChain独立服务启动脚本 (ASCII编码)
+﻿# FaceChain独立服务启动脚本 (ASCII编码)
 Write-Host "正在启动FaceChain独立服务..." -ForegroundColor Green
 
 # 激活Python虚拟环境
