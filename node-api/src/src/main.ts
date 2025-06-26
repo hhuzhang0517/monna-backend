@@ -61,9 +61,9 @@ async function bootstrap() {
   
   // SSL证书配置
   if (USE_HTTPS) {
-    // 使用环境变量或默认路径
-    const SSL_CERT_PATH = process.env.SSL_CERT_PATH || path.resolve('D:/xroting/monna/certificate.crt');
-    const SSL_KEY_PATH = process.env.SSL_KEY_PATH || path.resolve('D:/xroting/monna/private.key');
+    // 使用环境变量或默认路径 - 更新为新的证书位置
+    const SSL_CERT_PATH = process.env.SSL_CERT_PATH || path.resolve('./ssl/certificate.crt');
+    const SSL_KEY_PATH = process.env.SSL_KEY_PATH || path.resolve('./ssl/server.key');
     
     console.log('启用HTTPS配置');
     console.log('SSL证书路径:', SSL_CERT_PATH);
